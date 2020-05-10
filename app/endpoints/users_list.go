@@ -5,9 +5,14 @@
 package endpoints
 
 import (
+	"github.com/kazekim/UserData/app/entities"
 	"github.com/kazekim/UserData/pkg/udhttp"
 	"net/http"
 )
+
+type ListUsersResponse struct {
+	Users []entities.User `json:"users"`
+}
 
 func (ep *defaultEndpoint) listUsers(w http.ResponseWriter, r *http.Request) {
 
@@ -17,6 +22,9 @@ func (ep *defaultEndpoint) listUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_ = udhttp.ResponseJSON(w, http.StatusOK, *us)
+	var response ListUsersResponse
+	response.Users = *us
+
+	_ = udhttp.ResponseJSON(w, http.StatusOK, response)
 
 }
