@@ -7,4 +7,5 @@ package udconst
 const (
 	ErrMessageIDIntegerOnly = "id should be integer only"
 	ErrMessageNoDataFound   = "no data found"
+	ErrMessageSuccess       = "success"
 )

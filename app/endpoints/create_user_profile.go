@@ -5,10 +5,31 @@
 package endpoints
 
 import (
-	"fmt"
+	"github.com/kazekim/UserData/internal/udconst"
+	"github.com/kazekim/UserData/pkg/udhttp"
 	"net/http"
 )
 
-func createUserProfile(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Wassap, %s!", r.URL.Path[1:])
+type CreateUserRequest struct {
+	Email     string `json:"email"`
+	Fullname  string `json:"full_name"`
+	Telephone string `json:"telephone"`
+}
+
+func (ep *defaultEndpoint) createUserProfile(w http.ResponseWriter, r *http.Request) {
+
+	var request CreateUserRequest
+	err := ep.parseJSONBodyParam(r, &request)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = ep.userUseCase.CreateUser(request.Email, request.Fullname, request.Telephone)
+	if err != nil {
+		_ = udhttp.ResponseJSON(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	_ = udhttp.ResponseJSON(w, http.StatusOK, udconst.ErrMessageSuccess)
+
 }
