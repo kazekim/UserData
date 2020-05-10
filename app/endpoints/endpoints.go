@@ -36,7 +36,7 @@ func (ep *defaultEndpoint) RegisterUserService() {
 	ep.GET("/users/{id}", ep.getUserProfile)
 	ep.PUT("/users/", ep.createUserProfile)
 	ep.POST("/users/{id}", ep.updateUserProfile)
-	ep.DELETE("/users/{id}", deleteUserProfile)
+	ep.DELETE("/users/{id}", ep.deleteUserProfile)
 
 	//ep.HandleFunc("/", getRoot)
 	//ep.sv.Han
