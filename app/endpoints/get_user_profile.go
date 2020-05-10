@@ -7,8 +7,16 @@ package endpoints
 import (
 	"github.com/kazekim/UserData/internal/udconst"
 	"github.com/kazekim/UserData/pkg/udhttp"
+	"github.com/mitchellh/mapstructure"
 	"net/http"
 )
+
+type GetUserProfileResponse struct {
+	ID        int64
+	Email     string
+	Fullname  string
+	Telephone string
+}
 
 func (ep *defaultEndpoint) getUserProfile(w http.ResponseWriter, r *http.Request) {
 
@@ -23,5 +31,12 @@ func (ep *defaultEndpoint) getUserProfile(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	_ = udhttp.ResponseJSON(w, http.StatusOK, *u)
+	var response GetUserProfileResponse
+	err = mapstructure.Decode(*u, &response)
+	if err != nil {
+		_ = udhttp.ResponseJSON(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	_ = udhttp.ResponseJSON(w, http.StatusOK, response)
 }
