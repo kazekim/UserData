@@ -32,7 +32,7 @@ func NewEndpoint(userUseCase usecases.UserUseCase) Endpoint {
 
 func (ep *defaultEndpoint) RegisterUserService() {
 
-	ep.GET("/users/{id}", getUserProfile)
+	ep.GET("/users/{id}", ep.getUserProfile)
 	ep.PUT("/users/", createUserProfile)
 	ep.POST("/users/{id}", createUserProfile)
 	ep.DELETE("/users/{id}", deleteUserProfile)

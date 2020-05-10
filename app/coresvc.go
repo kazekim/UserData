@@ -14,11 +14,15 @@ import (
 )
 
 type Config struct {
-	dbName string
+	serverPort string
+	dbName     string
 }
 
-func NewConfig() *Config {
-	return &Config{}
+func NewConfig(serverPort, dbName string) *Config {
+	return &Config{
+		serverPort: serverPort,
+		dbName:     dbName,
+	}
 }
 
 type CoreService interface {
