@@ -6,16 +6,18 @@ package userdb
 
 import (
 	"github.com/kazekim/UserData/internal/userdb/v1/entities"
+	"time"
 )
 
 func (c *defaultClient) UpdateUser(user *userdbentities.User) error {
 	stmt, err := c.db.Prepare("update " + userdbentities.TableUser + " set " + userdbentities.TableUserFieldEmail + " = ?, " +
-		userdbentities.TableUserFieldFullName + " = ?, " + userdbentities.TableUserFieldTelephone + " = ? where " +
+		userdbentities.TableUserFieldFullName + " = ?, " + userdbentities.TableUserFieldTelephone + " = ?, " +
+		userdbentities.TableUserFieldUpdatedAt + " = ? where " +
 		userdbentities.TableUserFieldID + " = ?")
 	if err != nil {
 		return err
 	}
-	_, err = stmt.Exec(user.Email, user.Fullname, user.Telephone, user.ID)
+	_, err = stmt.Exec(user.Email, user.Fullname, user.Telephone, user.ID, time.Now())
 	if err != nil {
 		return err
 	}

@@ -5,6 +5,7 @@
 package endpoints
 
 import (
+	"github.com/kazekim/UserData/app/usecases"
 	"github.com/kazekim/UserData/pkg/udhttp"
 	"net/http"
 )
@@ -15,15 +16,17 @@ type Endpoint interface {
 }
 
 type defaultEndpoint struct {
-	mux udhttp.ServeMux
+	userUseCase usecases.UserUseCase
+	mux         udhttp.ServeMux
 }
 
-func NewEndpoint() Endpoint {
+func NewEndpoint(userUseCase usecases.UserUseCase) Endpoint {
 
 	mux := udhttp.NewServeMux()
 
 	return &defaultEndpoint{
-		mux: mux,
+		userUseCase: userUseCase,
+		mux:         mux,
 	}
 }
 

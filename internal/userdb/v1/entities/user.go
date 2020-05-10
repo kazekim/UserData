@@ -4,12 +4,16 @@
 
 package userdbentities
 
+import "time"
+
 const (
 	TableUser               = "User"
 	TableUserFieldID        = "ID"
 	TableUserFieldEmail     = "Email"
 	TableUserFieldFullName  = "Fullname"
 	TableUserFieldTelephone = "Telephone"
+	TableUserFieldCreatedAt = "CreatedAt"
+	TableUserFieldUpdatedAt = "UpdatedAt"
 )
 
 type User struct {
@@ -17,4 +21,6 @@ type User struct {
 	Email     string
 	Fullname  string
 	Telephone string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
