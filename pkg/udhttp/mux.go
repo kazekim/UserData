@@ -5,7 +5,6 @@
 package udhttp
 
 import (
-	"fmt"
 	"net/http"
 	"regexp"
 	"strings"
@@ -62,7 +61,6 @@ func (m *defaultServeMux) GET(pattern string, handler func(w http.ResponseWriter
 		}
 	}
 
-	fmt.Println(mPtrn, " |", sPtrn, "|")
 	var f httpMethodFunc
 	f.path = mPtrn
 	s := append(f.Get, sph)
@@ -85,7 +83,7 @@ func (m *defaultServeMux) POST(pattern string, handler func(w http.ResponseWrite
 			return
 		}
 	}
-	fmt.Println(mPtrn, " |", sPtrn, "|")
+
 	var f httpMethodFunc
 	f.path = mPtrn
 	s := append(f.Post, sph)

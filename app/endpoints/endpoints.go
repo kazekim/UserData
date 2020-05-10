@@ -5,7 +5,6 @@
 package endpoints
 
 import (
-	"fmt"
 	"github.com/kazekim/UserData/pkg/udhttp"
 	"net/http"
 )
@@ -34,7 +33,7 @@ func (ep *defaultEndpoint) RegisterUserService() {
 	ep.PUT("/users/", createUserProfile)
 	ep.POST("/users/{id}", createUserProfile)
 	ep.DELETE("/users/{id}", deleteUserProfile)
-	//ep.GET("/", getRoot)
+
 	//ep.HandleFunc("/", getRoot)
 	//ep.sv.Han
 }
@@ -57,8 +56,4 @@ func (ep *defaultEndpoint) DELETE(pattern string, handler func(http.ResponseWrit
 
 func (ep *defaultEndpoint) Handler() http.Handler {
 	return ep.mux
-}
-
-func getRoot(w http.ResponseWriter, r *http.Request) {
-	_, _ = fmt.Fprintf(w, "Wassap, %s!", r.URL.Path[1:])
 }
